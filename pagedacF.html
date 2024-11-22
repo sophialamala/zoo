@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zootopia</title>
     <style>
-         /* Centrage de l'image et du texte */
-         .logo-container {
-            text-align: center;
-            margin-top: 50px;
-        }
-        /* Ajustement de la taille du logo */
-        .logo {
-            width: 200px; /* Ajuste la taille comme tu veux */
-            height: auto;
-        }
-        
         /* Styles de base */
         body {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -23,28 +12,145 @@
             padding: 0;
             display: flex;
             justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            background-color: #e3caab;
+            position: relative;
+        }
+
+        /* Conteneur pour le lien "Se connecter" */
+        .header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
             align-items: center;
-            height: 10vh;
-            background-color: #aea765; 
+        }
+
+        /* Style du lien "Se connecter" */
+        .login-link {
+            font-size: 1.5rem;
+            color: #000000;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            margin-left: 10px; /* Espacement entre logo et texte */
+        }
+
+        /* Style pour le logo du lien de connexion */
+        .login-logo {
+            width: 40px;
+            height: auto;
+        }
+
+        /* Conteneur pour le lien "Billetterie" aligné à droite et centré verticalement */
+        .ticket-container {
+            position: absolute;
+            right: 20px; /* Aligné à droite */
+            top: 50%; /* Positionné au centre verticalement */
+            transform: translateY(-50%); /* Ajuste la position pour centrer exactement */
+            display: flex;
+            align-items: center; /* Aligne logo et texte horizontalement */
+        }
+
+        /* Style pour le logo du lien "Billetterie" */
+        .ticket-logo {
+            width: 60px;
+            height: auto;
+        }
+
+        /* Style du lien "Billetterie" */
+        .ticket-link {
+            font-size: 1.5rem;
+            color: #000000;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            margin-left: 10px; /* Espacement entre logo et texte */
         }
 
         /* Style du conteneur principal */
         .container {
             text-align: center;
+            margin-top: 50px;
         }
 
         /* Style du titre principal */
         .title {
-            font-size: 5rem;
+            font-size: 6rem;
             font-weight: bold;
-            color: #000000; /* Bleu foncé */
+            color: #000000;
             margin: 0;
         }
+
+        /* Centrage de l'image et du texte */
+        .logo-container {
+            margin-top: 10px;
+        }
+
+        /* Ajustement de la taille du logo */
+        .logo {
+            width: 300px;
+            height: auto;
+        }
+
+        /* Style de la phrase d'accroche */
+        .tagline {
+            font-size: 1.5rem;
+            color: #000000;
+            margin-top: 10px;
+        }
+
+        /* Style pour les nouveaux liens sous le logo avec une police différente */
+        .nav-links {
+            margin-top: 30px;
+        }
+
+        .nav-links a {
+            font-family: 'Poppins', sans-serif; /* Police différente pour ces liens */
+            font-size: 1.3rem;
+            color: #000000;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 20px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #3e8e41;
+            text-decoration: underline;
+        }
     </style>
+    <!-- Importation de la police Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Conteneur du lien "Se connecter" en haut à droite -->
+    <div class="header">
+        <img src="connec2.jpg" alt="Icone de connexion" class="login-logo">
+        <a href="coF.html" class="login-link">Se connecter</a>
+    </div>
+
+    <!-- Conteneur du lien "Billetterie" aligné à droite et centré verticalement -->
+    <div class="ticket-container">
+        <!-- Logo pour la billetterie -->
+        <img src="billet.jpg" alt="Icone de billetterie" class="ticket-logo">
+        <a href="billetF.html" class="ticket-link">Billetterie</a>
+    </div>
+
     <div class="container">
         <h1 class="title">ZOOTOPIA</h1>
+        <p class="tagline">Partez à l'aventure au cœur de la nature sauvage !</p>
+        <div class="logo-container">
+            <img src="logo3.jpg" alt="Logo Zootopia" class="logo">
+        </div>
+
+        <!-- Liens sous le logo -->
+        <div class="nav-links">
+            <a href="parcZ.html">Parcourir Zootopia</a> <!-- Lien existant -->
+            <a href="decoupF.html">Découvrir le parc</a> <!-- Nouveau lien ajouté -->
+            <a href="prepvF.html">Préparer votre visite</a>
+            <a href="aproposF.html">À propos</a>
+        </div>
     </div>
 </body>
 </html>

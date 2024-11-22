@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan du Parc - Biomes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            text-align: center;
+            background-color: #e3caab;
+        }
+        h1 {
+            background-color: #503b14;
+            color: white;
+            padding: 20px;
+        }
+        .plan-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .plan-container img {
+            width: 90%;
+            max-width: 1200px;
+            border: 2px solid #333;
+        }
+        .biome-link {
+            position: absolute;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.3s ease;
+        }
+        .biome-link:hover {
+            border: 2px solid #ff006e;
+        }
+        /* Définition précise des zones des biomes */
+        .biome-1 { top: 60%; left: 35%; width: 22%; height: 20%; } /* Vallon des Cascades */
+        .biome-2 { top: 35%; left: 30%; width: 25%; height: 22%; } /* Plateau */
+        .biome-3 { top: 10%; left: 25%; width: 22%; height: 18%; } /* Belvédère */
+        .biome-4 { top: 35%; left: 60%; width: 25%; height: 12%; } /* Clairières */
+        .biome-5 { top: 60%; left: 60%; width: 35%; height: 8%; } /* Bois des Pins */
+        .biome-6 { top: 50%; left: 5%; width: 12%; height: 10%; } /* Bergerie des Reptiles */
+
+        /* Style du bouton de retour */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    </style>
+    <script>
+        function openBiomePage(biome) {
+            // Remplacez l'URL par celle que vous souhaitez pour chaque biome
+            const pages = {
+                "biome1": "vcF.html",
+                "biome2": "pF.html",
+                "biome3": "bF.html",
+                "biome4": "cF.html",
+                "biome5": "bpF.html",
+                "biome6": "brF.html"
+            };
+            window.location.href = pages[biome];
+        }
+    </script>
+</head>
+<body>
+    <h1>Plan du Parc : Explorez les Biomes</h1>
+    
+    <!-- Bouton de retour -->
+    <a href="pagedacF.html" class="back-btn">←</a>
+
+    <div class="plan-container">
+        <img src="planduparc.jpg" alt="Plan du Parc">
+        <!-- Lien vers les biomes avec l'événement onclick -->
+        <div class="biome-link biome-1" onclick="openBiomePage('biome1')" title="Vallon des Cascades"></div>
+        <div class="biome-link biome-2" onclick="openBiomePage('biome2')" title="Plateau"></div>
+        <div class="biome-link biome-3" onclick="openBiomePage('biome3')" title="Belvédère"></div>
+        <div class="biome-link biome-4" onclick="openBiomePage('biome4')" title="Clairières"></div>
+        <div class="biome-link biome-5" onclick="openBiomePage('biome5')" title="Bois des Pins"></div>
+        <div class="biome-link biome-6" onclick="openBiomePage('biome6')" title="Bergerie des Reptiles"></div>
+    </div>
+</body>
+</html>

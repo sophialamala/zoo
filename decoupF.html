@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Découvrir les Biomes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e3caab;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            color: #503b14;
+            margin-top: 40px;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+        /* Flexbox container pour aligner les biomes uniformément */
+        .biome-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: flex-start;
+        }
+
+        .biome {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .biome:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+        .biome h2 {
+            color: #000000;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .animals {
+            font-size: 1.2rem;
+            color: #555;
+            flex-grow: 1;
+            overflow-y: auto; /* Ajouté pour faire défiler le contenu */
+            max-height: 180px; /* Limite la hauteur et permet la barre de défilement */
+            padding-right: 15px; /* Espace pour la barre de défilement */
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin: 5px 0;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+        li:hover {
+            background-color: #e0f7e1;
+            transform: scale(1.05);
+        }
+
+        /* Style pour la flèche de retour */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        .back-btn:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .back-btn i {
+            font-size: 1.5rem;
+        }
+
+        /* Style pour les Biomes 2 et 4 afin de les rendre défilables */
+        .biome2, .biome4 {
+            max-height: 300px; /* Limite la hauteur totale de la section */
+            overflow-y: auto; /* Permet de faire défiler verticalement */
+            padding-right: 15px; /* Pour l'espace de la barre de défilement */
+        }
+    </style>
+</head>
+<body>
+    <!-- Flèche de retour -->
+    <a href="javascript:history.back()" class="back-btn">
+        <i>&#8592;</i> <!-- Icône de flèche gauche -->
+    </a>
+
+    <div class="container">
+        <h1>Les Biomes de Zootopia</h1>
+
+        <div class="biome-container">
+            <!-- Biome 1 : Le Vallon des Cascades -->
+            <div class="biome">
+                <h2>Le Vallon des Cascades </h2>
+                <div class="animals">
+                    <ul>
+                        <li>Mouflon / Chèvre naine / Panda roux / Lémurien / Tortue</li>
+                        <li>Binturong / Loutre</li>
+                        <li>Panthère</li>
+                        <li>Ara perroquet</li>
+                        <li>Grand hocco</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Biome 2 : Le Plateau avec volet déroulant -->
+            <div class="biome biome2">
+                <h2>Le Plateau </h2>
+                <div class="animals">
+                    <ul>
+                        <li>Zèbre</li>
+                        <li>Hyène</li>
+                        <li>Lion</li>
+                        <li>Hippopotame</li>
+                        <li>Loup à crinière</li>
+                        <li>Girafe</li>
+                        <li>Éléphant</li>
+                        <li>Grivet Cercopithèque</li>
+                        <li>Varan de Komodo</li>
+                        <li>Tamarin / Capucin / Gibbon / Ouistiti</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Biome 3 : Le Belvédère -->
+            <div class="biome">
+                <h2>Le Belvédère </h2>
+                <div class="animals">
+                    <ul>
+                        <li>Casoar / Crocodile nain / Suricate / Fennec / Coati / Saïmiri / Tapir</li>
+                        <li>Gnou / Oryx beisa / Rhinocéros</li>
+                        <li>Guépard</li>
+                        <li>Gazelle / Autruche</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Biome 4 : Les Clairières avec volet déroulant -->
+            <div class="biome biome4">
+                <h2>Les Clairières </h2>
+                <div class="animals">
+                    <ul>
+                        <li>Âne de Provence / Dromadaire / Bison / Oryx algazelle / Watusi / Âne de Somalie</li>
+                        <li>Yack / Mouton noir</li>
+                        <li>Cigogne / Marabout</li>
+                        <li>Tigre</li>
+                        <li>Chien des buissons</li>
+                        <li>Serval</li>
+                        <li>Lynx</li>
+                        <li>Émeu / Wallaby</li>
+                        <li>Porc épic</li>
+                        <li>Tamanoir / Nandou / Flamant rose</li>
+                        <li>Pécari</li>
+                        <li>Ibis / Tortue</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Biome 5 : Le Bois des Pins -->
+            <div class="biome">
+                <h2>Le Bois des Pins </h2>
+                <div class="animals">
+                    <ul>
+                        <li>Loup d'Europe</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Biome 6 : La Bergerie des Reptiles -->
+            <div class="biome">
+                <h2>La Bergerie des Reptiles </h2>
+                <div class="animals">
+                    <ul>
+                        <li>Python / Iguane / Tortue</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

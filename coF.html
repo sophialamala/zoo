@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Safari Adventure</title>
+    <style>
+        /* Utilisation d'un fond en couleur #e3caab */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e3caab; /* Fond coloré en #e3caab */
+            flex-direction: column;
+        }
+
+        /* Conteneur de la page de connexion */
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        /* Titre de la page */
+        h1 {
+            font-size: 2.5rem;
+            color: #3e8e41; /* Couleur verte inspirée de la nature */
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Champ de saisie */
+        input {
+            font-size: 1.1rem;
+            padding: 15px;
+            margin: 12px 0;
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Effet au focus des champs de saisie */
+        input:focus {
+            outline: none;
+            border-color: #3e8e41;
+            background-color: #fff;
+        }
+
+        /* Bouton de connexion */
+        .login-btn {
+            font-size: 1.2rem;
+            padding: 15px;
+            width: 100%;
+            background-color: #3e8e41;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .login-btn:hover {
+            background-color: #2e6b34;
+        }
+
+        /* Lien inscription */
+        .signup-link {
+            font-size: 1rem;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #3e8e41;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+            color: #2e6b34;
+        }
+
+        /* Flèche pour revenir en arrière */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Logo safari */
+        .logo {
+            width: 250px; /* Ajuste la taille du logo */
+            height: auto;
+            margin-bottom: 30px; /* Espace entre le logo et le formulaire */
+        }
+    </style>
+</head>
+<body>
+    <!-- Flèche pour revenir en arrière -->
+    <a href="javascript:history.back()" class="back-btn">&#8592;</a>
+
+    <!-- Logo au-dessus du cadre -->
+    <img src="logo3.jpg" alt="Logo Safari Adventure" class="logo">
+
+    <div class="container">
+        <h1>Connexion</h1>
+        <form action="#">
+            <input type="text" placeholder="Nom d'utilisateur" required><br>
+            <input type="password" placeholder="Mot de passe" required><br>
+            <button type="submit" class="login-btn">Se connecter</button>
+        </form>
+
+        <!-- Lien vers la page d'inscription -->
+        <p><a href="sinscrireF.html" class="signup-link">Vous n'avez pas de compte ? S'inscrire</a></p>
+    </div>
+</body>
+</html>

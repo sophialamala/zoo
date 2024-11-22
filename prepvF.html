@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Préparer votre visite - Zootopia</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3caab;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        /* Conteneur principal */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+         
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #503b14;
+            margin-bottom: 20px;
+        }
+
+        /* Flèche de retour */
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: #503b14;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .back-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section Plan du Parc */
+        .plan-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .plan-section h2 {
+            font-size: 2rem;
+            color: #503b14;
+            border-bottom: 2px solid #503b14;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .plan-section img {
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .plan-caption {
+            font-size: 1rem;
+            color: #555;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* Section Services */
+        .services-section {
+            margin-top: 40px;
+        }
+
+        .services-section h2 {
+            font-size: 2rem;
+            color: #503b14;
+            border-bottom: 2px solid #503b14;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .service-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 2px solid #503b14;
+            border-radius: 10px;
+            background-color: #f5ebdc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #503b14;
+            margin-bottom: 5px;
+        }
+
+        .service-description {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Section Avis */
+        .feedback-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .feedback-section h2 {
+            font-size: 2rem;
+            color: #503b14;
+            border-bottom: 2px solid #503b14;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        
+
+        .feedback-form input,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .feedback-form button {
+            padding: 10px 15px;
+            background-color: #503b14;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .feedback-form button:hover {
+            background-color: #503b14;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Flèche de retour -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+
+    <div class="container">
+        <!-- Contenu principal -->
+        <h1>Préparer votre visite</h1>
+
+        <!-- Section Plan du Parc -->
+        <div class="plan-section">
+            <h2>Plan du Parc</h2>
+            <p>Avant votre visite, consultez le plan du parc pour repérer les différentes zones et attractions. Cela vous permettra de mieux organiser votre parcours et de ne rien manquer des moments forts de Zootopia.</p>
+            <img src="planduparc.jpg" alt="Plan du parc">
+            <p class="plan-caption">Plan interactif du parc avec toutes les zones d'attractions, restaurants, et espaces de repos.</p>
+        </div>
+
+        <!-- Section des Services -->
+        <div class="services-section">
+            <h2>Services Disponibles</h2>
+
+            <!-- Liste des services -->
+            <div class="service-item">
+                <p class="service-title">Toilettes à proximité</p>
+                <p class="service-description">Des toilettes sont disponibles à divers endroits dans le parc, notamment près de l'entrée, des restaurants et des attractions principales.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-title">Espaces de repos</p>
+                <p class="service-description">Des espaces ombragés et des bancs sont installés dans tout le parc pour permettre aux visiteurs de se reposer entre leurs aventures.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-title">Parking</p>
+                <p class="service-description">Le parc dispose de plusieurs parkings gratuits et payants, ainsi qu'un espace réservé pour les personnes à mobilité réduite.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-title">Point de premiers secours</p>
+                <p class="service-description">Des postes de premiers secours sont disponibles dans tout le parc en cas d'urgence médicale.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-title">Boutiques</p>
+                <p class="service-description">Des boutiques sont situées dans le parc où vous pouvez acheter des souvenirs, des produits dérivés et des articles de première nécessité.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-title">Point d'eau</p>
+                <p class="service-description">Des fontaines d'eau potable sont disponibles dans tout le parc pour vous permettre de vous hydrater gratuitement.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-title">Gare à proximité</p>
+                <p class="service-description">La gare la plus proche est à 10 minutes en voiture du parc, avec des navettes régulières qui vous emmènent directement à l'entrée.</p>
+            </div>
+
+            <div class="service-item">
+                <p class="service-title">Trajet de train pour visiter</p>
+                <p class="service-description">Un train touristique parcourt le zoo pour vous permettre de visiter les zones principales tout en vous relaxant.</p>
+            </div>
+        </div>
+
+        <!-- Section Avis -->
+        <div class="feedback-section">
+            <h2>Laissez votre avis</h2>
+            <form class="feedback-form" action="submit_feedback.php" method="POST">
+                <input type="text" name="name" placeholder="Votre nom" required>
+                <textarea name="feedback" rows="5" placeholder="Votre avis" required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Zootopia. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>

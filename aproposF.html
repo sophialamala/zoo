@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos - Zootopia</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5ebdc;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        /* Conteneur principal */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #3e8e41;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #3e8e41;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .directors {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .director {
+            width: 45%;
+            background-color: #f5ebdc;
+            border: 2px solid #3e8e41;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .director img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .director h3 {
+            font-size: 1.5rem;
+            color: #3e8e41;
+            margin-bottom: 10px;
+        }
+
+        .director p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .mission {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .mission p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Flèche de retour */
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: #3e8e41;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .back-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Flèche de retour -->
+    <a href="javascript:history.back()" class="back-arrow">&#8592;</a>
+
+    <div class="container">
+        <!-- Titre principal -->
+        <h1>À propos de Zootopia</h1>
+
+        <!-- Présentation des directrices -->
+        <h2>Qui sommes-nous ?</h2>
+        <p>Bienvenue à Zootopia ! Nous sommes Sophie et Ilana, deux passionnées de nature, de faune et d'éducation. En tant que jeunes directrices du parc, notre mission est de créer un lieu où les visiteurs peuvent se connecter avec la biodiversité tout en découvrant l'importance de la conservation et du respect de l'environnement.</p>
+
+        <div class="directors">
+            <!-- Sophie -->
+            <div class="director">
+                <img src="sophie.jpg" alt="Sophie, directrice du parc">
+                <h3>Sophie</h3>
+                <p>Sophie est une biologiste spécialisée dans la conservation des espèces menacées. Dès son plus jeune âge, elle a été fascinée par les animaux et leur rôle essentiel dans l'écosystème. Sa vision pour Zootopia est de faire du parc un sanctuaire pour la faune tout en éduquant les générations futures.</p>
+            </div>
+
+            <!-- Ilana -->
+            <div class="director">
+                <img src="ilana.jpg" alt="Ilana, directrice du parc">
+                <h3>Ilana</h3>
+                <p>Ilana est une spécialiste en gestion durable et une fervente défenseure de l'éco-responsabilité. Avec Sophie, elle travaille à intégrer des pratiques respectueuses de l'environnement dans chaque aspect du parc. Son objectif : faire de Zootopia un modèle d'innovation et de respect pour la planète.</p>
+            </div>
+        </div>
+
+        <!-- Mission du parc -->
+        <div class="mission">
+            <h2>Notre mission</h2>
+            <p>Zootopia, ce n'est pas seulement un parc : c'est une expérience éducative, interactive et inoubliable. Nous croyons que chaque visite peut inspirer une prise de conscience environnementale et encourager des actions positives pour notre planète. Avec vos visites, vous soutenez nos efforts pour protéger les espèces et leur habitat naturel.</p>
+            <p>Nous nous engageons également à offrir un espace accueillant pour tous, où les familles, les amis et les curieux de tous âges peuvent apprendre tout en s'amusant. Ensemble, construisons un futur où humains et animaux vivent en harmonie.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Zootopia. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
