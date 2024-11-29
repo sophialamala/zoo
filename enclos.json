@@ -1,0 +1,109 @@
+{
+    "biomes": [
+      {
+        "id": 6,
+        "name": "La bergerie des reptiles",
+        "animals": [
+          "Python",
+          "Iguane",
+          "Tortue"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Le bois des pins",
+        "animals": [
+          "Loup d'Europe",
+          "Daim",
+          "Antilope",
+          "Nilgaut",
+          "Vautour",
+          "Cerf",
+          "Macaque crabier"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Le belvédère",
+        "animals": [
+          "Casoar",
+          "Crocodile nain",
+          "Suricate",
+          "Fennec",
+          "Coati",
+          "Saïmiri",
+          "Tapir",
+          "Gnou",
+          "Oryx beisa",
+          "Rhinocéros",
+          "Guépard",
+          "Gazelle",
+          "Autruche"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Les clairières",
+        "animals": [
+          "Âne de Provence",
+          "Dromadaire",
+          "Bison",
+          "Oryx algazelle",
+          "Watusi",
+          "Âne de Somalie",
+          "Yack",
+          "Mouton noir",
+          "Cigogne",
+          "Marabout",
+          "Tigre",
+          "Chien des buissons",
+          "Serval",
+          "Lynx",
+          "Émeu",
+          "Wallaby",
+          "Porc épic",
+          "Tamanoir",
+          "Nandou",
+          "Flamant rose",
+          "Pécari",
+          "Ibis",
+          "Tortue"
+        ]
+      },
+      {
+        "id": 1,
+        "name": "Le vallon des cascades",
+        "animals": [
+          "Mouflon",
+          "Chèvre naine",
+          "Panda roux",
+          "Lémurien",
+          "Tortue",
+          "Binturong",
+          "Loutre",
+          "Panthère",
+          "Ara perroquet",
+          "Grand hocco"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Le plateau",
+        "animals": [
+          "Zèbre",
+          "Hyène",
+          "Lion",
+          "Hippopotame",
+          "Loup à crinière",
+          "Girafe",
+          "Éléphant",
+          "Grivet cercopithèque",
+          "Varan de Komodo",
+          "Tamarin",
+          "Capucin",
+          "Gibbon",
+          "Ouistiti"
+        ]
+      }
+    ]
+  }
