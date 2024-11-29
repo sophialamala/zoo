@@ -119,6 +119,24 @@
             color: #3e8e41;
             text-decoration: underline;
         }
+
+        /* Style pour la vidéo en tant que bandeau */
+        .video-banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px; /* Hauteur de la bandeau */
+            overflow: hidden;
+            z-index: -1; /* S'assurer que la vidéo soit derrière le contenu */
+        }
+
+        .video-banner video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Couvre toute la surface sans déformation */
+        }
+
     </style>
     <!-- Importation de la police Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -137,6 +155,14 @@
         <a href="billetF.html" class="ticket-link">Billetterie</a>
     </div>
 
+    <!-- Bandeau vidéo en boucle -->
+    <div class="video-banner">
+        <video autoplay muted loop>
+            <source src="2024_11_07_zoodelaflèche_présentation_parc_master_spot_tv_20s_voixoff_sansvoix_texte__1080p___1_.mp4" type="video/mp4">
+            Votre navigateur ne prend pas en charge la vidéo.
+        </video>
+    </div>
+
     <div class="container">
         <h1 class="title">ZOOTOPIA</h1>
         <p class="tagline">Partez à l'aventure au cœur de la nature sauvage !</p>
@@ -147,7 +173,7 @@
         <!-- Liens sous le logo -->
         <div class="nav-links">
             <a href="parcZF.html">Parcourir Zootopia</a> <!-- Lien existant -->
-            <a href="decoupF.html">Découvrir le parc</a> <!-- Nouveau lien ajouté -->
+            <a href="enclosidF.html">Découvrir le parc</a> <!-- Nouveau lien ajouté -->
             <a href="prepvF.html">Préparer votre visite</a>
             <a href="aproposF.html">À propos</a>
         </div>

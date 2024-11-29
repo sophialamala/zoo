@@ -77,23 +77,30 @@
             border-radius: 8px;
         }
 
-        #back-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #503b14;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+       /* Flèche pour revenir en arrière */
+       .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
         }
 
-        #back-button:hover {
-            background-color: #70572b;
+        .back-btn:hover {
+            background-color: #503b14;
+            color: #fff;
         }
     </style>
 </head>
 <body>
+    <!-- Flèche pour revenir en arrière -->
+    <a href="javascript:history.back()" class="back-btn">&#8592;</a>
+
     <h1>Liste des Biomes</h1>
 
     <!-- Liste des cartes des biomes -->
