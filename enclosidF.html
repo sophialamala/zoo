@@ -3,50 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrousel d'images</title>
-    <!-- Lien vers Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Détails des Biomes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e3caab;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #503b14;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .biome-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .biome-card {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-align: center;
+            width: 200px;
+        }
+
+        .biome-card:hover {
+            transform: scale(1.05);
+            background-color: #e0f7e1;
+        }
+
+        #biome-detail {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .carousel img {
+            width: 150px;
+            height: 100px;
+            border-radius: 8px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        #back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #503b14;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #back-button:hover {
+            background-color: #70572b;
+        }
+    </style>
 </head>
 <body>
+    <h1>Liste des Biomes</h1>
 
-<div class="container my-5">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <!-- Indicateurs (les petites pastilles sous le carrousel) -->
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Les images du carrousel -->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://via.placeholder.com/800x400?text=Image+1" class="d-block w-100" alt="Image 1">
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400?text=Image+2" class="d-block w-100" alt="Image 2">
-            </div>
-            <div class="carousel-item">
-                <img src="https://via.placeholder.com/800x400?text=Image+3" class="d-block w-100" alt="Image 3">
-            </div>
-        </div>
-
-        <!-- Contrôles gauche et droit pour naviguer entre les images -->
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Précédent</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Suivant</span>
-        </a>
+    <!-- Liste des cartes des biomes -->
+    <div id="biome-list" class="biome-list">
+        <div class="biome-card" onclick="showBiome('vallon')">Le Vallon des Cascades</div>
+        <div class="biome-card" onclick="showBiome('plateau')">Le Plateau</div>
+        <div class="biome-card" onclick="showBiome('belvedere')">Le Belvédère</div>
+        <div class="biome-card" onclick="showBiome('claireires')">Les Clairières</div>
+        <div class="biome-card" onclick="showBiome('bois')">Le Bois des Pins</div>
+        <div class="biome-card" onclick="showBiome('bergerie')">La Bergerie des Reptiles</div>
     </div>
-</div>
 
-<!-- Lien vers Bootstrap JS et Popper.js pour faire fonctionner les composants -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Section Détails -->
+    <div id="biome-detail">
+        <h2 id="biome-name"></h2>
+        <div id="carousel" class="carousel"></div>
+        <p id="biome-description"></p>
+        <ul id="animal-list"></ul>
+        <button id="back-button" onclick="goBack()">Retour</button>
+    </div>
 
+    <script>
+        // Données des biomes
+        const biomes = {
+            vallon: {
+                name: "Le Vallon des Cascades",
+                description: "Un espace luxuriant avec des cascades, des forêts tropicales et une diversité incroyable d'animaux.",
+                animals: ["Mouflon", "Panda roux", "Lémurien", "Tortue", "Ara perroquet"],
+                images: ["path_to_image/mouflon.jpg", "path_to_image/panda_roux.jpg", "path_to_image/lemurien.jpg"]
+            },
+            plateau: {
+                name: "Le Plateau",
+                description: "Une savane vaste et ensoleillée abritant de grands mammifères africains.",
+                animals: ["Zèbre", "Hyène", "Lion", "Girafe", "Éléphant"],
+                images: ["path_to_image/zebre.jpg", "path_to_image/girafe.jpg", "path_to_image/elephant.jpg"]
+            },
+            belvedere: {
+                name: "Le Belvédère",
+                description: "Un panorama ouvert sur des plaines et des collines, parfait pour observer les guépards et les rhinocéros.",
+                animals: ["Guépard", "Gazelle", "Autruche", "Tapir", "Rhinocéros"],
+                images: ["path_to_image/guépard.jpg", "path_to_image/autruche.jpg", "path_to_image/rhinoceros.jpg"]
+            },
+            claireires: {
+                name: "Les Clairières",
+                description: "Une forêt clairsemée idéale pour les animaux des régions tempérées et tropicales.",
+                animals: ["Tigre", "Lynx", "Wallaby", "Porc-épic", "Ibis"],
+                images: ["path_to_image/tigre.jpg", "path_to_image/lynx.jpg", "path_to_image/wallaby.jpg"]
+            },
+            bois: {
+                name: "Le Bois des Pins",
+                description: "Une forêt dense avec des pins abritant principalement des loups.",
+                animals: ["Loup d'Europe"],
+                images: ["path_to_image/loup.jpg"]
+            },
+            bergerie: {
+                name: "La Bergerie des Reptiles",
+                description: "Un habitat chaud et humide, parfait pour les reptiles.",
+                animals: ["Python", "Iguane", "Tortue"],
+                images: ["path_to_image/python.jpg", "path_to_image/iguane.jpg", "path_to_image/tortue.jpg"]
+            }
+        };
+
+        // Affiche le biome sélectionné
+        function showBiome(key) {
+            const biome = biomes[key];
+            document.getElementById("biome-list").style.display = "none";
+            document.getElementById("biome-detail").style.display = "block";
+
+            document.getElementById("biome-name").textContent = biome.name;
+            document.getElementById("biome-description").textContent = biome.description;
+
+            const carousel = document.getElementById("carousel");
+            carousel.innerHTML = biome.images.map(img => `<img src="${img}" alt="${biome.name}">`).join("");
+
+            const animalList = document.getElementById("animal-list");
+            animalList.innerHTML = biome.animals.map(animal => `<li>${animal}</li>`).join("");
+        }
+
+        // Retour à la liste des biomes
+        function goBack() {
+            document.getElementById("biome-list").style.display = "flex";
+            document.getElementById("biome-detail").style.display = "none";
+        }
+    </script>
 </body>
 </html>
