@@ -97,7 +97,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="populateBiomes()">
     <!-- Flèche pour revenir en arrière -->
     <a href="javascript:history.back()" class="back-btn">&#8592;</a>
 
@@ -105,13 +105,7 @@
 
     <!-- Liste des cartes des biomes -->
     <div id="biome-list" class="biome-list">
-        <div class="biome-card" onclick="showBiome('vallon')">Le Vallon des Cascades</div>
-        <div class="biome-card" onclick="showBiome('plateau')">Le Plateau</div>
-        <div class="biome-card" onclick="showBiome('belvedere')">Le Belvédère</div>
-        <div class="biome-card" onclick="showBiome('claireires')">Les Clairières</div>
-        <div class="biome-card" onclick="showBiome('bois')">Le Bois des Pins</div>
-        <div class="biome-card" onclick="showBiome('bergerie')">La Bergerie des Reptiles</div>
-    </div>
+   </div>
 
     <!-- Section Détails -->
     <div id="biome-detail">
@@ -124,6 +118,8 @@
 
     <script>
         // Données des biomes
+        var biomes = {};
+        /*
         const biomes = {
             vallon: {
                 name: "Le Vallon des Cascades",
@@ -162,21 +158,50 @@
                 images: ["path_to_image/python.jpg", "path_to_image/iguane.jpg", "path_to_image/tortue.jpg"]
             }
         };
+        */
+
+        function populateBiomes() {
+            const requestOptions = {
+            method: "POST",
+            redirect: "follow"
+            };
+
+            fetch("http://localhost/zoo/zoo/b.php", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                var biomesHTML = "";
+                let list = document.getElementById("biome-list");
+                biomes = result
+                for(biome of result) {
+                    biomes[biome.id] = biome;
+                    let json = JSON.stringify(biome);
+                    biomesHTML += "<div class=\"biome-card\" onclick=\"showBiome("+biome.id+")\">"+biome.nom+"</div>";
+                }
+                list.innerHTML = biomesHTML;
+                //<div class="biome-card" onclick="showBiome('vallon')">Le Vallon des Cascades</div>
+            })
+            .catch((error) => console.error(error));
+        }
 
         // Affiche le biome sélectionné
         function showBiome(key) {
-            const biome = biomes[key];
+            let biome = biomes[key];
+            //const biome = biomes[key];
             document.getElementById("biome-list").style.display = "none";
             document.getElementById("biome-detail").style.display = "block";
 
-            document.getElementById("biome-name").textContent = biome.name;
-            document.getElementById("biome-description").textContent = biome.description;
+            document.getElementById("biome-name").textContent = biome.nom;
+            document.getElementById("biome-description").textContent = "";
 
             const carousel = document.getElementById("carousel");
-            carousel.innerHTML = biome.images.map(img => `<img src="${img}" alt="${biome.name}">`).join("");
+            //carousel.innerHTML = biome.images.map(img => `<img src="${img}" alt="${biome.name}">`).join("");
 
-            const animalList = document.getElementById("animal-list");
-            animalList.innerHTML = biome.animals.map(animal => `<li>${animal}</li>`).join("");
+            let animalList = document.getElementById("animal-list");
+            animalList.innerHTML = biome.enclos.map(enclos =>
+            `<li>${
+             enclos.animaux.map( animal => animal.nom).join(" ")
+             }</li>`
+            ).join("");
         }
 
         // Retour à la liste des biomes
