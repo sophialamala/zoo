@@ -5,129 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billetterie - Zootopia</title>
     <style>
-        /* Styles de base */
+        /* Importation de la police Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffefd5; /* Couleur sable clair */
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
-        }
-
-        /* Conteneur principal */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* En-tête */
-        header {
-            background-color: #e3caab;
-            padding: 20px;
             text-align: center;
         }
 
-        header h1 {
+        h1 {
+            color: #000000; /* Vert forêt */
             font-size: 3rem;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
             color: #000;
-            margin: 0;
         }
 
-        /* Section des options de billets */
-        .ticket-options {
+        .ticket-container {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 40px;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Espacement entre les billets */
+            margin-top: 30px;
+            flex-wrap: wrap; /* Permet le retour à la ligne si l'espace est insuffisant */
         }
 
-        .ticket-option {
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+        .ticket {
+            background-color: #fffacd; /* Jaune pastel */
+            border: 2px dashed #8b4513; /* Style "billet" */
+            border-radius: 15px;
             padding: 20px;
             width: 250px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin: 10px;
         }
 
-        .ticket-option h2 {
+        h2 {
+            color: #8b4513; /* Brun terre */
             font-size: 1.8rem;
-            color: #333;
         }
 
-        .ticket-option p {
-            font-size: 1.2rem;
-            color: #666;
-            margin: 10px 0;
-        }
-
-        .ticket-option button {
-            background-color: #f39c12;
-            color: #fff;
+        button {
+            background-color: #8b4513; /* Brun sable clair */
+            color: white;
             border: none;
+            border-radius: 10px;
             padding: 10px 20px;
-            font-size: 1.1rem;
-            border-radius: 5px;
+            font-size: 1rem;
             cursor: pointer;
+            margin-top: 10px;
             transition: background-color 0.3s;
         }
 
-        .ticket-option button:hover {
-            background-color: #e67e22;
+        button:hover {
+            background-color: #e3caab; /* Brun orangé */
         }
 
-        /* Footer */
         footer {
-            background-color: #e3caab;
+            background-color: #2e8b57; /* Vert forêt */
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Style de la flèche de retour */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: #000000; /* Brun terre */
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.1); /* Fond légèrement transparent */
             padding: 10px;
-            text-align: center;
-            font-size: 1rem;
-            color: #333;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: rgba(0, 0, 0, 0.2); /* Fond plus foncé au survol */
         }
     </style>
 </head>
 <body>
+    <!-- Bouton retour -->
+    <a href="pagedacF.html" class="back-btn">&#8592;</a> <!-- Redirige vers la page d'accueil -->
 
-    <header>
-        <h1>Billetterie Zootopia</h1>
-    </header>
+    <h1>Bienvenue à Zootopia !</h1>
+    <p>Découvrez notre billetterie pour une aventure inoubliable parmi les animaux !</p>
 
-    <div class="container">
-        <h2>Choisissez votre billet</h2>
+    <!-- Conteneur des billets -->
+    <div class="ticket-container">
+        <!-- Billet Adulte -->
+        <div class="ticket">
+            <h2>Billet Adulte</h2>
+            <p>Prix : 30€</p>
+            <button>Acheter</button>
+        </div>
 
-        <!-- Options de billets -->
-        <div class="ticket-options">
-            <!-- Billet 1 -->
-            <div class="ticket-option">
-                <h2>Billet Adulte</h2>
-                <p>Accès complet à toutes les attractions de Zootopia.</p>
-                <p>Prix : 30€</p>
-                <button>Acheter</button>
-            </div>
+        <!-- Billet Enfant -->
+        <div class="ticket">
+            <h2>Billet Enfant</h2>
+            <p>Prix : 20€</p>
+            <button>Acheter</button>
+        </div>
 
-            <!-- Billet 2 -->
-            <div class="ticket-option">
-                <h2>Billet Enfant</h2>
-                <p>Accès complet pour les enfants de 4 à 12 ans.</p>
-                <p>Prix : 20€</p>
-                <button>Acheter</button>
-            </div>
-
-            <!-- Billet 3 -->
-            <div class="ticket-option">
-                <h2>Billet Famille</h2>
-                <p>Pour 2 adultes et 2 enfants. Offre spéciale famille.</p>
-                <p>Prix : 80€</p>
-                <button>Acheter</button>
-            </div>
+        <!-- Billet Famille -->
+        <div class="ticket">
+            <h2>Billet Famille</h2>
+            <p>Prix : 80€</p>
+            <button>Acheter</button>
         </div>
     </div>
 
     <footer>
         <p>© 2024 Zootopia - Tous droits réservés</p>
     </footer>
-
 </body>
 </html>
