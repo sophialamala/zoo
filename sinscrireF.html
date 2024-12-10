@@ -5,92 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription - Safari Adventure</title>
     <style>
-        /* Utilisation d'un fond en couleur #e3caab */
+        /* Importation de la police Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        /* Fond principal */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #e3caab; /* Couleur sable clair */
             margin: 0;
             padding: 0;
+            text-align: center;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #e3caab; /* Fond coloré en #e3caab */
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative; /* Nécessaire pour le positionnement des branches */
+            overflow: hidden;
         }
 
-        /* Conteneur de la page d'inscription */
-        .container {
-            text-align: center;
-            width: 100%;
-            max-width: 450px;
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        /* Positionnement pour les branches */
+        .branch-left,
+        .branch-right {
+            position: absolute;
+            top: 150px; /* Faire descendre les branches */
+            width: 150px;
+            height: auto;
+        }
+
+        .branch-left {
+            left: 0;
+            transform: rotate(0deg);
+            margin-left: 20px;
+        }
+
+        .branch-right {
+            right: 0;
+            transform: rotate(15deg);
+            margin-right: 20px;
+        }
+
+        /* Titre principal */
+        h1 {
+            color: #000000;
+            font-size: 3rem;
             margin-top: 20px;
         }
 
-        /* Titre de la page */
-        h1 {
-            font-size: 2.5rem;
-            color: #3e8e41; /* Couleur verte inspirée de la nature */
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            font-weight: 600;
+        /* Conteneur central avec style */
+        .container {
+            background-color: #fffacd; /* Jaune pastel */
+            border: 2px dashed #8b4513; /* Style "billet" */
+            border-radius: 15px;
+            padding: 30px;
+            width: 300px;
+            margin-top: 20px;
         }
 
-        /* Champ de saisie */
+        /* Champs de saisie */
         input {
-            font-size: 1.1rem;
-            padding: 15px;
-            margin: 12px 0;
+            font-size: 1rem;
+            padding: 10px;
+            margin: 10px 0;
             width: 100%;
             border-radius: 10px;
             border: 1px solid #ddd;
-            background-color: #f9f9f9;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
         }
 
-        /* Effet au focus des champs de saisie */
-        input:focus {
-            outline: none;
-            border-color: #3e8e41;
-            background-color: #fff;
-        }
-
-        /* Bouton d'inscription */
-        .signup-btn {
+        /* Bouton pour s'inscrire */
+        button {
             font-size: 1.2rem;
-            padding: 15px;
+            padding: 12px;
             width: 100%;
-            background-color: #3e8e41;
+            background-color: #8b4513;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
             margin-top: 20px;
+            transition: background-color 0.3s;
         }
 
-        .signup-btn:hover {
-            background-color: #2e6b34;
+        button:hover {
+            background-color: #e3caab;
         }
 
-        /* Lien vers la page de connexion */
+        /* Lien pour retourner vers la connexion */
         .login-link {
-            font-size: 1rem;
             margin-top: 15px;
             text-decoration: none;
-            color: #3e8e41;
+            color: #8b4513;
             font-weight: bold;
-            display: inline-block;
-            transition: all 0.3s ease;
         }
 
         .login-link:hover {
             text-decoration: underline;
-            color: #2e6b34;
         }
 
         /* Flèche pour revenir en arrière */
@@ -98,24 +107,24 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            font-size: 1.5rem;
-            color: #ffffff;
+            font-size: 2rem;
+            color: #000000;
             text-decoration: none;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(255, 255, 255, 0.7);
             padding: 10px;
             border-radius: 50%;
             transition: background-color 0.3s ease;
         }
 
         .back-btn:hover {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.2);
         }
 
-        /* Logo safari */
+        /* Logo Safari */
         .logo {
-            width: 250px; /* Ajuste la taille du logo */
+            width: 150px; /* Ajuste la taille du logo */
             height: auto;
-            margin-bottom: 30px; /* Espace entre le logo et le formulaire */
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -123,20 +132,26 @@
     <!-- Flèche pour revenir en arrière -->
     <a href="javascript:history.back()" class="back-btn">&#8592;</a>
 
-    <!-- Logo au-dessus du cadre -->
+    <!-- Branches à gauche et à droite -->
+    <img src="branche.jpg" alt="Branche Gauche" class="branch-left">
+    <img src="branche.jpg" alt="Branche Droite" class="branch-right">
+
+    <!-- Logo au-dessus du formulaire -->
     <img src="logo3.jpg" alt="Logo Safari Adventure" class="logo">
 
+    <h1>Créer un compte</h1>
+
     <div class="container">
-        <h1>Inscription</h1>
-        <form action="#">
+        <form action="#" method="POST">
             <input type="text" placeholder="Nom d'utilisateur" required><br>
-            <input type="email" placeholder="Email" required><br>
+            <input type="email" placeholder="Adresse email" required><br>
             <input type="password" placeholder="Mot de passe" required><br>
-            <button type="submit" class="signup-btn">S'inscrire</button>
+            <input type="password" placeholder="Confirmez le mot de passe" required><br>
+            <button type="submit">S'inscrire</button>
         </form>
 
-        <!-- Lien pour se connecter -->
-        <p><a href="coF.html" class="login-link">Déjà un compte ? Se connecter</a></p>
+        <!-- Lien vers la page de connexion -->
+        <p><a href="coF.html" class="login-link">Vous avez déjà un compte ? Se connecter</a></p>
     </div>
 </body>
 </html>
