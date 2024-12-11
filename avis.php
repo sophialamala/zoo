@@ -3,35 +3,54 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Configuration de la base de données
-$host = '127.0.0.1'; // Adresse du serveur
-$dbname = 'accbbdd'; // Nom de la base de données
-$username = 'root'; // Nom d'utilisateur
-$password = ''; // Mot de passe
+// Étape 1 : Connexion à la base de données
+$server = "localhost";
+$username = "root";
+$password = "";
+$databaseName = "accbbdd";
 
-try {
-    // Connexion à la base de données avec PDO
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Connexion à la base de données
+$conn = new mysqli($server, $username, $password, $databaseName);
 
-    // Préparer et exécuter la requête SQL
-    $stmt = $pdo->prepare("SELECT * FROM avis");
-    $stmt->execute();
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die(json_encode(["error" => "La connexion à la base de données a échoué : " . $conn->connect_error]));
+}
 
-    // Récupérer les résultats
-    $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Étape 2 : Vérifier si la méthode utilisée est POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer les données envoyées par le client via POST
+    $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : null;
+    $commentaire = isset($_POST['commentaire']) ? $_POST['commentaire'] : null;
+    $note = isset($_POST['note']) ? $_POST['note'] : null;
 
-    // Vérifier si des résultats existent
-    header('Content-Type: application/json');
-    if (empty($avis)) {
-        echo json_encode(["message" => "Aucun avis trouvé"]);
-    } else {
-        echo json_encode($avis, JSON_PRETTY_PRINT);
+    // Étape 3 : Validation des données
+    if (empty($user_id) || empty($commentaire) || empty($note)) {
+        die(json_encode(["error" => "Tous les champs (user_id, commentaire, note) sont requis."]));
     }
 
-} catch (PDOException $e) {
-    // Gérer les erreurs
-    http_response_code(500);
-    echo json_encode(["error" => "Erreur de connexion à la base de données : " . $e->getMessage()]);
+    // Étape 4 : Préparer la requête d'insertion
+    $stmt = $conn->prepare("INSERT INTO avis (user_id, date, commentaire, note) VALUES (?, NOW(), ?, ?)");
+    if (!$stmt) {
+        die(json_encode(["error" => "Erreur de préparation de la requête : " . $conn->error]));
+    }
+
+    // Associer les paramètres
+    $stmt->bind_param("isi", $user_id, $commentaire, $note);
+
+    // Étape 5 : Exécuter la requête
+    if ($stmt->execute()) {
+        echo json_encode(["message" => "Avis ajouté avec succès."]);
+    } else {
+        echo json_encode(["error" => "Erreur lors de l'ajout de l'avis : " . $stmt->error]);
+    }
+
+    // Fermer la requête préparée
+    $stmt->close();
+} else {
+    echo json_encode(["error" => "Méthode HTTP non autorisée. Utilisez POST."]);
 }
+
+// Fermer la connexion
+$conn->close();
 ?>
