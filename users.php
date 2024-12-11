@@ -1,55 +1,67 @@
 <?php
-// Configuration de la base de données
-$host = '127.0.0.1'; // Adresse de votre serveur MySQL
-$dbname = 'accbbdd'; // Nom de votre base de données
-$username = 'root'; // Nom d'utilisateur MySQL
-$password = ''; // Mot de passe MySQL
+// Activer l'affichage des erreurs
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-try {
-    // Connexion à la base de données avec PDO
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
+// Connexion à la base de données
+$server = "localhost";
+$username = "root";
+$password = "";
+$databaseName = "accbbdd";
+
+$conn = new mysqli($server, $username, $password, $databaseName);
+
+// Vérification de la connexion
+if ($conn->connect_error) {
+    die(json_encode(["error" => "Connexion échouée : " . $conn->connect_error]));
 }
 
-// Vérification que les données POST sont présentes
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupération des données envoyées
-    $email = isset($_POST['mail']) ? trim($_POST['mail']) : null;
-    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
-    $role = isset($_POST['role']) ? trim($_POST['role']) : null;
-    $username = isset($_POST['username']) ? trim($_POST['username']) : null;
+// Vérifier que la méthode HTTP est POST
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Récupérer les données POST
+    $mail = isset($_POST['mail']) ? $_POST['mail'] : null;
+    $password = isset($_POST['password']) ? $_POST['password'] : null;
+    $role = isset($_POST['role']) ? $_POST['role'] : null;
+    $username = isset($_POST['username']) ? $_POST['username'] : null;
 
-    // Validation basique des champs
-    if (empty($email) || empty($password) || empty($role) || empty($username)) {
-        echo json_encode(['success' => false, 'message' => 'Tous les champs sont obligatoires.']);
-        exit;
+    // Vérifier si tous les champs sont remplis
+    if (empty($mail) || empty($password) || empty($role) || empty($username)) {
+        die(json_encode(["error" => "Tous les champs (mail, password, role, username) sont requis."]));
     }
 
-    // Vérification si l'utilisateur existe déjà
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE mail = :email");
-    $stmt->execute(['email' => $email]);
-    if ($stmt->rowCount() > 0) {
-        echo json_encode(['success' => false, 'message' => 'Un utilisateur avec cet email existe déjà.']);
-        exit;
+    // Vérifier si l'utilisateur existe déjà
+    $checkUserQuery = "SELECT id FROM users WHERE mail = ?";
+    $stmt = $conn->prepare($checkUserQuery);
+    if (!$stmt) {
+        die(json_encode(["error" => "Erreur dans la préparation de la requête SELECT : " . $conn->error]));
     }
+    $stmt->bind_param("s", $mail);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // Insertion dans la base de données
-    $sql = "INSERT INTO users (mail, password, role, username) VALUES (:email, :password, :role, :username)";
-    $stmt = $pdo->prepare($sql);
-    $params = [
-        'email' => $email,
-        'password' => $password, // Le mot de passe est stocké en clair
-        'role' => $role,
-        'username' => $username
-    ];
+    if ($result->num_rows > 0) {
+        die(json_encode(["error" => "Un compte avec cet email existe déjà."]));
+    }
+    $stmt->close();
 
-    if ($stmt->execute($params)) {
-        echo json_encode(['success' => true, 'message' => 'Utilisateur enregistré avec succès.']);
+    // Insérer dans la base de données
+    $insertQuery = "INSERT INTO users (mail, password, role, username) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($insertQuery);
+    if (!$stmt) {
+        die(json_encode(["error" => "Erreur dans la préparation de la requête INSERT : " . $conn->error]));
+    }
+    $stmt->bind_param("ssss", $mail, $password, $role, $username);
+
+    if ($stmt->execute()) {
+        echo json_encode(["message" => "Compte créé avec succès."]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Une erreur est survenue lors de l\'enregistrement.']);
+        echo json_encode(["error" => "Erreur lors de la création du compte : " . $stmt->error]);
     }
+
+    $stmt->close();
 } else {
-    echo json_encode(['success' => false, 'message' => 'Requête non valide.']);
+    echo json_encode(["error" => "Méthode HTTP non autorisée. Utilisez POST."]);
 }
+
+$conn->close();
+?>
