@@ -1,28 +1,36 @@
 <?php
+// Activer l'affichage des erreurs pour le débogage
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+// Étape 1 : Connexion à la base de données
+$server = "localhost"; // Nom du serveur
+$username = "root";    // Nom d'utilisateur MySQL
+$password = "";        // Mot de passe MySQL
+$databaseName = "accbbdd"; // Nom de votre base de données
+
+// Créer une connexion
+$conn = new mysqli($server, $username, $password, $databaseName);
+
+// Vérifier la connexion
 if ($conn->connect_error) {
     die("La connexion à la base de données a échoué : " . $conn->connect_error);
 }
 
 // Étape 2 : Récupérer les biomes avec leurs enclos et animaux associés
-$sql = "SELECT * FROM `biomes`";
-// Étape 2 : Récupérer tous les enclos
-$sql = "SELECT * FROM `enclos`";
+$sql = "SELECT * FROM `biomes`"; // Récupération des biomes
 $result = $conn->query($sql);
 
-$array = array(); // Tableau pour stocker le résultat final
-$enclos = array(); // Tableau pour stocker les résultats
+$array = array(); // Tableau pour stocker les résultats
 
-// Parcourir les résultats et les ajouter au tableau
+// Parcourir les résultats des biomes
 while ($row = $result->fetch_assoc()) {
-    // Récupérer les enclos liés au biome courant
     $enclos_sql = "SELECT * FROM `enclos` WHERE id_biomes = '" . $row["id"] . "'";
     $enclos_result = $conn->query($enclos_sql);
 
-    $enclos = array(); // Réinitialiser le tableau des enclos pour ce biome
+    $enclos = array(); // Tableau pour stocker les enclos
 
     while ($enclosRow = $enclos_result->fetch_assoc()) {
-        // Récupérer les animaux liés à l'enclos courant
         $animaux_sql = "
             SELECT A.* 
             FROM `animaux` AS A
@@ -31,23 +39,24 @@ while ($row = $result->fetch_assoc()) {
         ";
         $animaux_result = $conn->query($animaux_sql);
 
-        $animaux = array(); // Réinitialiser le tableau des animaux pour cet enclos
+        $animaux = array(); // Tableau pour stocker les animaux
 
         while ($animauxRow = $animaux_result->fetch_assoc()) {
-            $animaux[] = $animauxRow; // Ajouter chaque animal dans le tableau
+            $animaux[] = $animauxRow; // Ajouter chaque animal au tableau
         }
 
-        $enclosRow["animaux"] = $animaux; // Ajouter les animaux à l'enclos courant
+        $enclosRow["animaux"] = $animaux; // Associer les animaux à l'enclos courant
         $enclos[] = $enclosRow; // Ajouter l'enclos au tableau des enclos
     }
 
-    $row["enclos"] = $enclos; // Ajouter les enclos au biome courant
-    $array[] = $row; // Ajouter le biome dans le résultat final
-    $enclos[] = $row;
+    $row["enclos"] = $enclos; // Associer les enclos au biome courant
+    $array[] = $row; // Ajouter le biome au tableau final
 }
 
 // Étape 3 : Envoyer les résultats sous forme de JSON
 header('Content-Type: application/json');
 echo json_encode($array, JSON_PRETTY_PRINT);
-echo json_encode($enclos, JSON_PRETTY_PRINT);
+
+// Fermer la connexion
+$conn->close();
 ?>
