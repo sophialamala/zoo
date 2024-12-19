@@ -1,39 +1,30 @@
-function sendGetRequest(url, callback) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            callback(JSON.parse(xhr.responseText));
-        }
-    };
-    xhr.send();
-}
-
-// Récupérer et afficher les biomes et enclos
-window.onload = function() {
-    sendGetRequest('biomes.php', function(response) {
-        if (response.success) {
-            const biomesContainer = document.getElementById('biomes-container');
-            for (const biome in response.data) {
-                const biomeDiv = document.createElement('div');
-                biomeDiv.classList.add('biome');
-                biomeDiv.innerHTML = `<h2>${biome}</h2>`;
-                
-                response.data[biome].enclos.forEach(function(enclos) {
-                    const enclosDiv = document.createElement('div');
-                    enclosDiv.classList.add('enclos');
-                    enclosDiv.innerHTML = `
-                        <h3>Enclos ID: ${enclos.enclos_id}</h3>
-                        <p>Repas: ${enclos.repas}</p>
-                        <p>Animaux: ${enclos.animaux}</p>
-                    `;
-                    biomeDiv.appendChild(enclosDiv);
-                });
-
-                biomesContainer.appendChild(biomeDiv);
-            }
+const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  
+  fetch("http://localhost/zoo/zoo/b.php", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+    function showBiome(id) {
+        let biome = biomes[id];
+    
+        document.getElementById("biome-list").style.display = "none";
+        document.getElementById("biome-detail").style.display = "block";
+    
+        document.getElementById("biome-name").textContent = biome.nom;
+        document.getElementById("biome-description").textContent = biome.description;
+    
+        // Afficher les enclos du biome
+        let enclosHTML = "";
+        if (biome.enclos && biome.enclos.length > 0) {
+            biome.enclos.forEach(enclos => {
+                enclosHTML += `<li>${enclos.nom}</li>`;
+            });
         } else {
-            alert('Erreur: ' + response.message);
+            enclosHTML = "<li>Aucun enclos disponible</li>";
         }
-    });
-};
+    
+        document.getElementById("enclos").innerHTML = enclosHTML;
+    }
