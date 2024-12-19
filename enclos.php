@@ -50,13 +50,9 @@ while ($row = $result->fetch_assoc()) {
     $array[] = $row; // Ajouter le biome dans le résultat final
 }
 
-// Debug : Vérifier la structure des données
-var_dump($array);
-
 // Étape 2 : Envoyer les résultats sous forme de JSON
 header('Content-Type: application/json');
 echo json_encode($array, JSON_PRETTY_PRINT);
 
-// Fermer la connexion
 $conn->close();
 ?>
