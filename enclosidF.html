@@ -52,19 +52,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .carousel {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-        }
-
-        .carousel img {
-            width: 150px;
-            height: 100px;
-            border-radius: 8px;
-        }
-
         ul {
             list-style-type: none;
             padding: 0;
@@ -76,139 +63,76 @@
             background-color: #f0f0f0;
             border-radius: 8px;
         }
-
-       /* Flèche pour revenir en arrière */
-       .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 1.5rem;
-            color: #ffffff;
-            text-decoration: none;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 10px;
-            border-radius: 50%;
-            transition: background-color 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background-color: #503b14;
-            color: #fff;
-        }
     </style>
 </head>
 <body onload="populateBiomes()">
-    <!-- Flèche pour revenir en arrière -->
-    <a href="javascript:history.back()" class="back-btn">&#8592;</a>
-
     <h1>Liste des Biomes</h1>
 
     <!-- Liste des cartes des biomes -->
-    <div id="biome-list" class="biome-list">
-   </div>
+    <div id="biome-list" class="biome-list"></div>
 
     <!-- Section Détails -->
     <div id="biome-detail">
         <h2 id="biome-name"></h2>
-        <div id="carousel" class="carousel"></div>
         <p id="biome-description"></p>
-        <ul id="animal-list"></ul>
+        <ul id="enclos"></ul>
         <button id="back-button" onclick="goBack()">Retour</button>
     </div>
 
     <script>
-        // Données des biomes
-        var biomes = {};
-        /*
-        const biomes = {
-            vallon: {
-                name: "Le Vallon des Cascades",
-                description: "Un espace luxuriant avec des cascades, des forêts tropicales et une diversité incroyable d'animaux.",
-                animals: ["Mouflon", "Panda roux", "Lémurien", "Tortue", "Ara perroquet"],
-                images: ["path_to_image/mouflon.jpg", "path_to_image/panda_roux.jpg", "path_to_image/lemurien.jpg"]
-            },
-            plateau: {
-                name: "Le Plateau",
-                description: "Une savane vaste et ensoleillée abritant de grands mammifères africains.",
-                animals: ["Zèbre", "Hyène", "Lion", "Girafe", "Éléphant"],
-                images: ["path_to_image/zebre.jpg", "path_to_image/girafe.jpg", "path_to_image/elephant.jpg"]
-            },
-            belvedere: {
-                name: "Le Belvédère",
-                description: "Un panorama ouvert sur des plaines et des collines, parfait pour observer les guépards et les rhinocéros.",
-                animals: ["Guépard", "Gazelle", "Autruche", "Tapir", "Rhinocéros"],
-                images: ["path_to_image/guépard.jpg", "path_to_image/autruche.jpg", "path_to_image/rhinoceros.jpg"]
-            },
-            claireires: {
-                name: "Les Clairières",
-                description: "Une forêt clairsemée idéale pour les animaux des régions tempérées et tropicales.",
-                animals: ["Tigre", "Lynx", "Wallaby", "Porc-épic", "Ibis"],
-                images: ["path_to_image/tigre.jpg", "path_to_image/lynx.jpg", "path_to_image/wallaby.jpg"]
-            },
-            bois: {
-                name: "Le Bois des Pins",
-                description: "Une forêt dense avec des pins abritant principalement des loups.",
-                animals: ["Loup d'Europe"],
-                images: ["path_to_image/loup.jpg"]
-            },
-            bergerie: {
-                name: "La Bergerie des Reptiles",
-                description: "Un habitat chaud et humide, parfait pour les reptiles.",
-                animals: ["Python", "Iguane", "Tortue"],
-                images: ["path_to_image/python.jpg", "path_to_image/iguane.jpg", "path_to_image/tortue.jpg"]
-            }
-        };
-        */
+        var biomes = {}; // Stocker les biomes
 
         function populateBiomes() {
-            const requestOptions = {
-            method: "POST",
-            redirect: "follow"
-            };
+            fetch("http://localhost/zoo/zoo/b.php")
+            .then(response => response.json()) // Convertir la réponse en JSON
+            .then(result => {
+                console.log("Données reçues du serveur :", result); // Afficher les données reçues
 
-            fetch("http://localhost/zoo/zoo/b.php", requestOptions)
-            .then((response) => response.json())
-            .then((result) => {
-                var biomesHTML = "";
+                let biomesHTML = "";
                 let list = document.getElementById("biome-list");
-                biomes = result
-                for(biome of result) {
-                    biomes[biome.id] = biome;
-                    let json = JSON.stringify(biome);
-                    biomesHTML += "<div class=\"biome-card\" onclick=\"showBiome("+biome.id+")\">"+biome.nom+"</div>";
-                }
+
+                // Créer les cartes des biomes
+                result.forEach(biome => {
+                    biomes[biome.id] = biome; // Ajouter chaque biome dans l'objet biomes
+                    biomesHTML += `<div class="biome-card" onclick="showBiome(${biome.id})">${biome.nom}</div>`;
+                });
+
                 list.innerHTML = biomesHTML;
-                //<div class="biome-card" onclick="showBiome('vallon')">Le Vallon des Cascades</div>
             })
-            .catch((error) => console.error(error));
+            .catch(error => {
+                console.error("Erreur de récupération des données :", error);
+            });
         }
 
-        // Affiche le biome sélectionné
-        function showBiome(key) {
-            let biome = biomes[key];
-            //const biome = biomes[key];
+        function showBiome(id) {
+            let biome = biomes[id]; // Récupérer le biome sélectionné
+            console.log("Biome sélectionné :", biome); // Afficher le biome sélectionné
+
             document.getElementById("biome-list").style.display = "none";
             document.getElementById("biome-detail").style.display = "block";
 
             document.getElementById("biome-name").textContent = biome.nom;
-            document.getElementById("biome-description").textContent = "";
+            document.getElementById("biome-description").textContent = biome.description;
 
-            const carousel = document.getElementById("carousel");
-            //carousel.innerHTML = biome.images.map(img => `<img src="${img}" alt="${biome.name}">`).join("");
+            // Affichage des enclos
+            let enclosHTML = "";
+            if (biome.enclos && biome.enclos.length > 0) {
+                biome.enclos.forEach(enclos => {
+                    enclosHTML += `<li>${enclos.nom}</li>`;
+                });
+            } else {
+                enclosHTML = "<li>Aucun enclos disponible</li>";
+            }
 
-            let animalList = document.getElementById("animal-list");
-            animalList.innerHTML = biome.enclos.map(enclos =>
-            `<li>${
-             enclos.animaux.map( animal => animal.nom).join(" ")
-             }</li>`
-            ).join("");
+            document.getElementById("enclos").innerHTML = enclosHTML;
         }
 
-        // Retour à la liste des biomes
         function goBack() {
             document.getElementById("biome-list").style.display = "flex";
             document.getElementById("biome-detail").style.display = "none";
         }
     </script>
+
+<script src ="enclos.js"></script>
 </body>
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enclos - Zoophoria</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="populateBiomes()">
+    <!-- En-tête -->
+    <a href="accueil.html" class="home-icon-link">
+        <img src="icon maison accueil.png" alt="Icône maison pour l'accueil" class="home-icon">
+    </a>
+
+    <header>
+        <div class="logoContainer">
+            <img src="logo.png" alt="Logo Zoophoria" class="logo">
+        </div>
+        <a href="connexion.html" class="login-link">
+            <img src="icon de profil login.png" alt="Icone de profil" class="login-icon">
+            Connexion / Inscription
+        </a>
+    </header>
+
+    <section class="enclos-header">
+        <h1>Découvrez nos biomes</h1>
+        <p>Explorez les habitats fascinants où résident nos animaux. Chaque enclos recrée un environnement naturel pour garantir le bien-être de nos résidents.</p>
+    </section>
+
+
+    <section id="biomes-container" class="biomes-section">
+        <!-- Les enclos seront affichés ici -->
+    </section>
+    <!-- Section principale pour les enclos -->
+    <section id="enclos-container" class="enclos-section">
+        <!-- Les enclos seront insérés ici dynamiquement avec JavaScript -->
+    </section>
+    <section id="animals-container" class="animals-section">
+        <!-- Les animaux seront affichés ici -->
+    </section>
+
+    <script src ="enclos.js"></script>
+
+    <div id="carousel-container" class="carousel-container"></div>
+<div id="animals-container" class="animals-container"></div>
+
+    
+</body>
+</html>

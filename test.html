@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails des Biomes</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e3caab;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #503b14;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .biome-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .biome-card {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-align: center;
+            width: 200px;
+        }
+
+        .biome-card:hover {
+            transform: scale(1.05);
+            background-color: #e0f7e1;
+        }
+
+        #biome-detail {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .carousel img {
+            width: 150px;
+            height: 100px;
+            border-radius: 8px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        /* Flèche pour revenir en arrière */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #503b14;
+            color: #fff;
+        }
+    </style>
+</head>
+<body onload="populateBiomes()">
+    <!-- Flèche pour revenir en arrière -->
+    <a href="javascript:history.back()" class="back-btn">&#8592;</a>
+
+    <h1>Liste des Biomes</h1>
+
+    <!-- Liste des cartes des biomes -->
+    <div id="biome-list" class="biome-list"></div>
+
+    <!-- Section Détails -->
+    <div id="biome-detail">
+        <h2 id="biome-name"></h2>
+        <div id="carousel" class="carousel"></div>
+        <p id="biome-description"></p>
+        <ul id="animal-list"></ul>
+        <button id="back-button" onclick="goBack()">Retour</button>
+    </div>
+
+    <script>
+        // Données des biomes
+        var biomes = {};
+
+        function populateBiomes() {
+            const requestOptions = {
+                method: "POST",
+                redirect: "follow"
+            };
+
+            fetch("http://localhost/zoo/zoo/b.php", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("Données reçues du serveur :", result); // Afficher les données brutes pour vérifier les doublons
+
+                var biomesHTML = "";
+                let list = document.getElementById("biome-list");
+
+                // Créer un objet pour vérifier les doublons de biomes
+                let seenBiomes = {};
+
+                result.forEach(biome => {
+                    // Vérifier si le biome n'a pas déjà été ajouté
+                    if (!seenBiomes[biome.id]) {
+                        seenBiomes[biome.id] = true; // Marquer ce biome comme vu
+                        biomes[biome.id] = biome; // Ajouter le biome à l'objet biomes
+                        biomesHTML += `<div class="biome-card" onclick="showBiome(${biome.id})">${biome.nom}</div>`;
+                    }
+                });
+
+                list.innerHTML = biomesHTML;
+            })
+            .catch((error) => console.error(error));
+        }
+
+        // Affiche le biome sélectionné
+        function showBiome(key) {
+            let biome = biomes[key];
+
+            document.getElementById("biome-list").style.display = "none";
+            document.getElementById("biome-detail").style.display = "block";
+
+            document.getElementById("biome-name").textContent = biome.nom;
+            document.getElementById("biome-description").textContent = biome.description;
+
+            const carousel = document.getElementById("carousel");
+            carousel.innerHTML = biome.images.map(img => `<img src="${img}" alt="${biome.nom}">`).join("");
+
+            let animalList = document.getElementById("animal-list");
+            let seenAnimals = {}; // Créer un objet pour vérifier les doublons d'animaux
+
+            animalList.innerHTML = biome.enclos.map(enclos =>
+                `<li>${
+                    enclos.animaux.map(animal => {
+                        // Vérifier si l'animal n'a pas déjà été ajouté
+                        if (!seenAnimals[animal.nom]) {
+                            seenAnimals[animal.nom] = true; // Marquer cet animal comme vu
+                            return animal.nom;
+                        }
+                        return ''; // Si l'animal est déjà vu, ne pas l'ajouter
+                    }).join(", ")
+                }</li>`
+            ).join("");
+        }
+
+        // Retour à la liste des biomes
+        function goBack() {
+            document.getElementById("biome-list").style.display = "flex";
+            document.getElementById("biome-detail").style.display = "none";
+        }
+    </script>
+    <script src="biome.js"></script>
+</body>
+</html>
