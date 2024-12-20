@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Enclos et Horaires</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #2C3E50;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        select, input, button {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gestion des Enclos et Horaires</h1>
+
+    <!-- Section pour afficher les enclos et animaux -->
+    <div class="section">
+        <h2>Enclos et Animaux</h2>
+        <div id="enclosList">
+            <!-- Liste des enclos et animaux affichée ici -->
+        </div>
+    </div>
+
+    <!-- Section pour ajouter un horaire -->
+    <div class="section">
+        <h2>Ajouter un Horaire de Repas</h2>
+        <form id="addHoraireForm">
+            <label for="enclosSelect">Sélectionner le Biome :</label>
+            <select id="enclosSelect">
+                <!-- Options d'enclos seront ajoutées ici -->
+            </select><br>
+
+            <label for="animalSelect">Sélectionner l'animal :</label>
+            <select id="animalSelect">
+                <!-- Options d'animaux seront ajoutées ici -->
+            </select><br>
+
+            <label for="horaire">Heure du repas :</label>
+            <input type="time" id="horaire" required><br>
+
+            <button type="submit">Ajouter l'horaire</button>
+        </form>
+    </div>
+
+    <script>
+        // Fonction pour récupérer les enclos depuis le backend
+        function getEnclos() {
+            fetch('enclos.php')
+                .then(response => response.json())
+                .then(data => {
+                    const enclosSelect = document.getElementById('enclosSelect');
+                    data.forEach(enclos => {
+                        const option = document.createElement('option');
+                        option.value = enclos.id;
+                        option.textContent = enclos.nom;
+                        enclosSelect.appendChild(option);
+                    });
+
+                    // Charger les animaux pour le premier enclos par défaut
+                    enclosSelect.dispatchEvent(new Event('change'));
+                });
+        }
+
+        // Fonction pour récupérer les animaux d'un enclos spécifique
+        function getAnimaux(enclosId) {
+            fetch(`animaux.php?enclosId=${enclosId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const animalSelect = document.getElementById('animalSelect');
+                    animalSelect.innerHTML = ''; // Réinitialiser les options
+
+                    data.forEach(animal => {
+                        const option = document.createElement('option');
+                        option.value = animal.id;
+                        option.textContent = animal.nom;
+                        animalSelect.appendChild(option);
+                    });
+                });
+        }
+
+        // Fonction pour gérer l'ajout d'un horaire
+        function ajouterHoraire(enclosId, animalId, horaire) {
+            fetch('b.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ enclosId, animalId, horaire })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            });
+        }
+
+        // Initialisation des événements
+        document.getElementById('enclosSelect').addEventListener('change', function() {
+            const enclosId = this.value;
+            getAnimaux(enclosId);
+        });
+
+        // Événement pour ajouter un horaire
+        document.getElementById('addHoraireForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const enclosId = document.getElementById('enclosSelect').value;
+            const animalId = document.getElementById('animalSelect').value;
+            const horaire = document.getElementById('horaire').value;
+
+            ajouterHoraire(enclosId, animalId, horaire);
+        });
+
+        // Charger les enclos au démarrage
+        getEnclos();
+    </script>
+
+</body>
+</html>
+
