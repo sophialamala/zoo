@@ -2,8 +2,18 @@ function sendGetRequest(url, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            callback(JSON.parse(xhr.responseText));
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    console.log("Réponse du serveur : ", response); // Affiche la réponse du serveur
+                    callback(response);
+                } catch (e) {
+                    console.error("Erreur de parsing JSON : ", e);
+                }
+            } else {
+                console.error("Erreur de requête : ", xhr.status);
+            }
         }
     };
     xhr.send();
@@ -16,16 +26,20 @@ window.onload = function() {
             alert(response.message); // Si aucun service trouvé
         } else {
             const tableBody = document.getElementById('services-table-body');
-            response.forEach(function(relation) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${relation.relation_id}</td>
-                    <td>${relation.quantité}</td>
-                    <td>${relation.id_biome}</td>
-                    <td>${relation.service_nom}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+            if (tableBody) {
+                console.log("Tableau trouvé : ", tableBody);
+                response.forEach(function(service) {
+                    console.log("Service : ", service); // Affiche chaque service
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${service.id}</td>
+                        <td>${service.nom}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } else {
+                console.error("Le corps du tableau est introuvable.");
+            }
         }
     });
 };

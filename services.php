@@ -15,7 +15,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Préparer et exécuter la requête SQL
-    $stmt = $pdo->prepare("SELECT * FROM services");
+    $stmt = $pdo->prepare("SELECT id, nom FROM services");
     $stmt->execute();
 
     // Récupérer les résultats

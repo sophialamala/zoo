@@ -43,6 +43,11 @@
             padding: 10px;
             border-radius: 8px;
         }
+
+        .info {
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -50,22 +55,32 @@
     <div class="carousel" id="carousel-photos"></div>
     <ul id="animal-list" class="animal-list"></ul>
 
-    <button onclick="history.back()">Retour</button>
+    <!-- Informations supplémentaires sur l'enclos -->
+    <div class="info">
+        <p><strong>Biomes ID:</strong> <span id="biome-id"></span></p>
+        <p><strong>Repas:</strong> <span id="repas"></span></p>
+    </div>
+
+    <button class="btn btn-secondary" onclick="history.back()">Retour</button>
 
     <script>
         // Récupérer les paramètres de l'URL
         const params = new URLSearchParams(window.location.search);
         const biomeId = params.get('biomeId');
+        const enclosId = params.get('enclosId');
 
         // Charger les détails de l'enclos
-        fetch(`http://localhost/zoo/zoo/biomes.php`)
+        fetch(`http://localhost/zoo/zoo/enclos.php`)
             .then((response) => response.json())
             .then((data) => {
+                // Trouver le biome et l'enclos correspondant
                 const biome = data.find(b => b.id == biomeId);
-                const enclos = biome.enclos[0]; // Ici, on suppose que tu veux afficher le premier enclos
+                const enclos = biome.enclos.find(e => e.id == enclosId);
 
-                // Mettre à jour les détails
+                // Mettre à jour les détails de l'enclos
                 document.getElementById("enclos-name").textContent = enclos.nom;
+                document.getElementById("biome-id").textContent = enclos.id_biomes;
+                document.getElementById("repas").textContent = enclos.repas;
 
                 // Ajouter les photos au carousel
                 const carousel = document.getElementById("carousel-photos");
@@ -85,7 +100,6 @@
     </script>
 
     <!-- Scripts Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="enclos.js"></script>
 </body>
 </html>
-

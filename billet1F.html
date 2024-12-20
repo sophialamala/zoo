@@ -107,6 +107,7 @@
     </style>
 </head>
 <body>
+
     <!-- Bouton retour -->
     <a href="pagedacF.html" class="back-btn">&#8592;</a> <!-- Redirige vers la page d'accueil -->
 
@@ -114,27 +115,8 @@
     <p>Découvrez notre billetterie pour une aventure inoubliable parmi les animaux !</p>
 
     <!-- Conteneur des billets -->
-    <div class="ticket-container">
-        <!-- Billet Adulte -->
-        <div class="ticket">
-            <h2>Billet Adulte</h2>
-            <p>Prix : 30€</p>
-            <button>Acheter</button>
-        </div>
-
-        <!-- Billet Enfant -->
-        <div class="ticket">
-            <h2>Billet Enfant</h2>
-            <p>Prix : 20€</p>
-            <button>Acheter</button>
-        </div>
-
-        <!-- Billet Famille -->
-        <div class="ticket">
-            <h2>Billet Famille</h2>
-            <p>Prix : 80€</p>
-            <button>Acheter</button>
-        </div>
+    <div class="ticket-container" id="ticket-container">
+        <!-- Les billets seront ajoutés ici par JavaScript -->
     </div>
 
     <!-- Conteneur de l'image -->
@@ -145,5 +127,28 @@
     <footer>
         <p>© 2024 Zootopia - Tous droits réservés</p>
     </footer>
+
+    <script>
+        // Fonction pour récupérer les tickets depuis le PHP
+        fetch("http://localhost/zoo/zoo/tickets.php")
+            .then(response => response.json())  // Récupère les données en JSON
+            .then(data => {
+                const ticketContainer = document.getElementById('ticket-container');
+                
+                // Si des tickets sont retournés, on les affiche
+                data.forEach(ticket => {
+                    const ticketDiv = document.createElement('div');
+                    ticketDiv.classList.add('ticket');
+                    ticketDiv.innerHTML = `
+                        <h2>${ticket.type}</h2>
+                        <p>Prix : ${ticket.price}€</p>
+                        <button>Acheter</button>
+                    `;
+                    ticketContainer.appendChild(ticketDiv);  // Ajouter chaque billet au conteneur
+                });
+            })
+            .catch(error => console.error('Erreur:', error));  // Gérer les erreurs
+    </script>
+
 </body>
 </html>

@@ -10,24 +10,27 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e3caab;
+            background-color: #e4d3b2;
             color: #333;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding-top: 50px;
+            background-image: url('background-safari.jpg'); /* Image de fond safari */
+            background-size: cover;
+            background-position: center;
         }
 
         /* Conteneur principal */
         .container {
             width: 90%;
             max-width: 1100px;
-         
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-top: 30px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
         }
 
         h1 {
@@ -35,6 +38,7 @@
             font-size: 3rem;
             color: #503b14;
             margin-bottom: 20px;
+            font-family: 'Georgia', serif;
         }
 
         /* Flèche de retour */
@@ -69,6 +73,7 @@
             border-bottom: 2px solid #503b14;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            font-family: 'Georgia', serif;
         }
 
         .plan-section img {
@@ -97,6 +102,7 @@
             border-bottom: 2px solid #503b14;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            font-family: 'Georgia', serif;
         }
 
         .service-item {
@@ -106,6 +112,8 @@
             border-radius: 10px;
             background-color: #f5ebdc;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-image: url('leaf-pattern.png'); /* Image de fond pour les services */
+            background-size: cover;
         }
 
         .service-title {
@@ -113,6 +121,7 @@
             font-weight: bold;
             color: #503b14;
             margin-bottom: 5px;
+            font-family: 'Georgia', serif;
         }
 
         .service-description {
@@ -132,9 +141,8 @@
             border-bottom: 2px solid #503b14;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            font-family: 'Georgia', serif;
         }
-
-        
 
         .feedback-form input,
         .feedback-form textarea {
@@ -158,7 +166,7 @@
         }
 
         .feedback-form button:hover {
-            background-color: #503b14;
+            background-color: #8a5e3d; /* Couleur plus claire au survol */
         }
 
         /* Footer */
@@ -167,6 +175,12 @@
             text-align: center;
             font-size: 0.9rem;
             color: #777;
+        }
+
+        /* Styles pour les éléments de formulaire */
+        .feedback-form input,
+        .feedback-form textarea {
+            font-family: 'Arial', sans-serif;
         }
     </style>
 </head>
@@ -192,53 +206,25 @@
             <h2>Services Disponibles</h2>
 
             <!-- Liste des services -->
-            <div class="service-item">
-                <p class="service-title">Toilettes à proximité</p>
-                <p class="service-description">Des toilettes sont disponibles à divers endroits dans le parc, notamment près de l'entrée, des restaurants et des attractions principales.</p>
-            </div>
-
-            <div class="service-item">
-                <p class="service-title">Espaces de repos</p>
-                <p class="service-description">Des espaces ombragés et des bancs sont installés dans tout le parc pour permettre aux visiteurs de se reposer entre leurs aventures.</p>
-            </div>
-
-            <div class="service-item">
-                <p class="service-title">Parking</p>
-                <p class="service-description">Le parc dispose de plusieurs parkings gratuits et payants, ainsi qu'un espace réservé pour les personnes à mobilité réduite.</p>
-            </div>
-
-            <div class="service-item">
-                <p class="service-title">Point de premiers secours</p>
-                <p class="service-description">Des postes de premiers secours sont disponibles dans tout le parc en cas d'urgence médicale.</p>
-            </div>
-
-            <div class="service-item">
-                <p class="service-title">Boutiques</p>
-                <p class="service-description">Des boutiques sont situées dans le parc où vous pouvez acheter des souvenirs, des produits dérivés et des articles de première nécessité.</p>
-            </div>
-
-            <div class="service-item">
-                <p class="service-title">Point d'eau</p>
-                <p class="service-description">Des fontaines d'eau potable sont disponibles dans tout le parc pour vous permettre de vous hydrater gratuitement.</p>
-            </div>
-
-            <div class="service-item">
-                <p class="service-title">Gare à proximité</p>
-                <p class="service-description">La gare la plus proche est à 10 minutes en voiture du parc, avec des navettes régulières qui vous emmènent directement à l'entrée.</p>
-            </div>
-
-            <div class="service-item">
-                <p class="service-title">Trajet de train pour visiter</p>
-                <p class="service-description">Un train touristique parcourt le zoo pour vous permettre de visiter les zones principales tout en vous relaxant.</p>
+            <div id="services-list">
+                <!-- Les services seront ajoutés dynamiquement ici -->
             </div>
         </div>
 
         <!-- Section Avis -->
         <div class="feedback-section">
             <h2>Laissez votre avis</h2>
-            <form class="feedback-form" action="submit_feedback.php" method="POST">
-                <input type="text" name="name" placeholder="Votre nom" required>
-                <textarea name="feedback" rows="5" placeholder="Votre avis" required></textarea>
+            <form class="feedback-form" action="avis.php" method="POST">
+                <!-- Nom de l'utilisateur -->
+                <input type="text" name="user_id" placeholder="Votre nom" required>
+                
+                <!-- Note sur 10 -->
+                <input type="number" name="note" min="1" max="10" placeholder="Note sur 10" required>
+                
+                <!-- Commentaire -->
+                <textarea name="commentaire" rows="5" placeholder="Votre commentaire" required></textarea>
+                
+                <!-- Bouton Envoyer -->
                 <button type="submit">Envoyer</button>
             </form>
         </div>
@@ -248,6 +234,40 @@
     <footer>
         <p>&copy; 2024 Zootopia. Tous droits réservés.</p>
     </footer>
+
+    <script>
+         // Fonction pour récupérer les services depuis la base de données
+         function sendGetRequest(url, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    callback(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.send();
+        }
+
+        // Récupérer et afficher les services
+        window.onload = function() {
+            sendGetRequest('services.php', function(response) {
+                if (response.message) {
+                    alert(response.message); // Si aucun service trouvé
+                } else {
+                    const servicesList = document.getElementById('services-list');
+                    response.forEach(function(service) {
+                        const serviceItem = document.createElement('div');
+                        serviceItem.classList.add('service-item');
+                        serviceItem.innerHTML = `
+                            <p class="service-title">${service.nom}</p>
+                            <p class="service-description">Description du service disponible dans le parc.</p>
+                        `;
+                        servicesList.appendChild(serviceItem);
+                    });
+                }
+            });
+        };
+    </script>
 
 </body>
 </html>
